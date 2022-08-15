@@ -13,7 +13,6 @@ then
     	[yY][eE][sS]|[yY])
 		echo "Yes"
 		device_name="disk2s1"
-		break
 		;;
  
     	[nN][oO]|[nN])
@@ -29,7 +28,7 @@ then
 fi
 
 # Use $1 as device name
-if [ $# -eq 1]
+if [ $# -eq 1 ]
 then
 	device_name=$1
 fi
