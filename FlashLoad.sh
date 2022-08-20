@@ -7,7 +7,8 @@ TARGET=stm32f4x.cfg
 #echo "\$#=$#"
 
 # check
-if [ $# -ne 1 ];then
+if [ $# -ne 1 ]
+then
     echo "usage: FlashLoad.sh <.bin>"
     exit 1
 fi
