@@ -6,8 +6,9 @@
 
 2. 用法：
 
-./ReMount
+./ReMount.sh
 
+(如果你想双击运行，可以把ReMount.sh重命名为ReMount.command)
 
 
 二、FlashLoad.sh
