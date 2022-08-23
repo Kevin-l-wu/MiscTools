@@ -5,40 +5,29 @@ echo "\$1=$1"
 
 mount_dir=${HOME}/Desktop/Test
 
-# Use default device name
-if [ $# -eq 0 ]
-then
-	read -r -p "Do you want to use default device name(disk2s1) ? [Y/n] " iskill
-	case $iskill in
-    	[yY][eE][sS]|[yY])
-		echo "Yes"
-		device_name="disk2s1"
-		;;
- 
-    	[nN][oO]|[nN])
-		echo "No"
-		exit 0
-       		;;
- 
-    	*)
-		echo "Invalid input..."
-		exit 1
-		;;
-	esac
-fi
-
-# Use $1 as device name
-if [ $# -eq 1 ]
-then
-	device_name=$1
-fi
 
 # Invalid input
-if [ $# -gt 1 ]
+if [ $# -ge 1 ]
 then
-	echo "Useage: ReMount/ReMount device_name(diskutil list)"
+	echo "Useage: ./ReMount"
 	exit 1
 fi
+
+
+# Get device name automatically
+TempStr=$(diskutil list | grep "Windows_NTFS")
+
+device_name=${TempStr:0-7}
+
+if [ -z $device_name ]
+then
+	echo "No NTFS Disk found!!!"
+	exit 1
+fi
+
+
+echo "\$device_name = $device_name"
+
 
 # Create mount dir in desktop
 if [ ! -e ${mount_dir} ]
