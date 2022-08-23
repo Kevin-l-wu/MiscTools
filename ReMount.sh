@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "\$#=$#"
-echo "\$1=$1"
 
 mount_dir=${HOME}/Desktop/Test
 
