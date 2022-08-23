@@ -6,9 +6,7 @@
 
 2. 用法：
 
-(1)./ReMount(Use default device name "disk2s1")
-
-(2)./ReMount device_name(Using command "diskutil list" to find out your device name firstly)
+./ReMount
 
 
 
@@ -20,4 +18,4 @@ STM32 下载固件
 
 2. 用法
 
-FlashLoad.sh <image_path_name>
+./FlashLoad.sh <image_path_name>
