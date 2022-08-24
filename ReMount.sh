@@ -8,6 +8,19 @@ disk_list=$(diskutil list)
 mount_dir_index=0
 
 
+# Check disk if mounted: mounted echo "Yes" otherwise ""
+IsMounted() {
+
+	device_name=$1
+
+	info=$(diskutil info /dev/${device_name} | grep "Mounted")
+
+	mounted=$(expr "$info" : '.*\(Yes\).*')
+
+	echo $mounted
+}
+
+
 # Do remount core function 
 DoRemount(){
 	device_name=$1
@@ -16,8 +29,7 @@ DoRemount(){
 
 	mount_dir=${HOME}/Desktop/Test"$mount_dir_index"
 
-	echo "$mount_dir"
-
+	
 	# Create mount dir in desktop
 	if [ ! -e ${mount_dir} ]
 	then
@@ -28,15 +40,20 @@ DoRemount(){
 	fi
 
 	# Unmount device 
-	sudo umount /dev/${device_name}
+	echo "Checking if mounted"
+	mounted=$(IsMounted "disk2s1")
 
+	if [ "$mounted" = "Yes" ]
+	then
+		sudo umount /dev/${device_name}
+	fi
+	
 
 	# Mounut device
 	echo "remounting..."
 
 	sudo mount -t ntfs -o rw,nobrowse /dev/${device_name} ${mount_dir}
 
-	#echo "\$?=$?"
 
 	if [ $? -eq 0 ]
 	then 	
@@ -45,6 +62,7 @@ DoRemount(){
 		echo "Remount failed!"
 	fi
 }
+
 
 # Find out all external disks
 disk_name_list=$(echo "$disk_list" | grep "external, physical")
