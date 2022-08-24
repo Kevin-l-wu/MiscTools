@@ -41,7 +41,7 @@ DoRemount(){
 
 	# Unmount device 
 	echo "Checking if mounted"
-	mounted=$(IsMounted "disk2s1")
+	mounted=$(IsMounted "$device_name")
 
 	if [ "$mounted" = "Yes" ]
 	then
