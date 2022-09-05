@@ -33,7 +33,7 @@ DoRemount(){
 	# Create mount dir in desktop
 	if [ ! -e ${mount_dir} ]
 	then
-		mkdir -p "$mount_dir"
+		sudo mkdir -p "$mount_dir"
 		echo "$mount_dir"" has created"
 	else
 		echo "$mount_dir"" exist"
