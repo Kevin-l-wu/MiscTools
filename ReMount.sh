@@ -29,15 +29,6 @@ DoRemount(){
 
 	mount_dir=${HOME}/Desktop/Test"$mount_dir_index"
 
-	
-	# Create mount dir in desktop
-	if [ ! -e ${mount_dir} ]
-	then
-		mkdir -p "$mount_dir"
-		echo "$mount_dir"" has created"
-	else
-		echo "$mount_dir"" exist"
-	fi
 
 	# Unmount device 
 	echo "Checking if mounted"
@@ -47,7 +38,15 @@ DoRemount(){
 	then
 		sudo umount /dev/${device_name}
 	fi
-	
+
+	# Create mount dir in desktop
+	if [ ! -e ${mount_dir} ]
+	then
+		mkdir -p "$mount_dir"
+		echo "$mount_dir"" has created"
+	else
+		echo "$mount_dir"" exist"
+	fi
 
 	# Mounut device
 	echo "remounting..."

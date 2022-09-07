@@ -29,16 +29,6 @@ DoRemount(){
 
 	mount_dir=/Volumes/Test"$mount_dir_index"
 
-	
-	# Create mount dir in desktop
-	if [ ! -e ${mount_dir} ]
-	then
-		sudo mkdir -p "$mount_dir"
-		echo "$mount_dir"" has created"
-	else
-		echo "$mount_dir"" exist"
-	fi
-
 	# Unmount device 
 	echo "Checking if mounted"
 	mounted=$(IsMounted "$device_name")
@@ -47,8 +37,16 @@ DoRemount(){
 	then
 		sudo diskutil unmount /dev/${device_name}
 	fi
-	
 
+	# Create mount dir in desktop
+	if [ ! -e ${mount_dir} ]
+	then
+		sudo mkdir -p "$mount_dir"
+		echo "$mount_dir"" has created"
+	else
+		echo "$mount_dir"" exist"
+	fi
+	
 	# Mounut device
 	echo "remounting..."
 

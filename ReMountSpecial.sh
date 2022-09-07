@@ -32,15 +32,6 @@ DoRemount(){
 	special_dir=${mount_dir}/_SPECIAL_DIR
 
 	
-	# Create mount dir in desktop
-	if [ ! -e ${mount_dir} ]
-	then
-		mkdir -p "$mount_dir"
-		echo "$mount_dir"" has created"
-	else
-		echo "$mount_dir"" exist"
-	fi
-
 	# Unmount device 
 	echo "Checking if mounted"
 	mounted=$(IsMounted "$device_name")
@@ -50,6 +41,14 @@ DoRemount(){
 		sudo umount /dev/${device_name}
 	fi
 	
+	# Create mount dir in desktop
+	if [ ! -e ${mount_dir} ]
+	then
+		mkdir -p "$mount_dir"
+		echo "$mount_dir"" has created"
+	else
+		echo "$mount_dir"" exist"
+	fi
 
 	# Mounut device
 	echo "remounting..."
