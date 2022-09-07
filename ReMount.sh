@@ -84,7 +84,12 @@ do
 	
 	# Get all partition of a disk
 	partition_list=$(echo "$disk_str" | grep "Windows_NTFS")
-		
+	
+	if [ "$partition_list" = "" ]
+	then
+		echo "No NTFS partition found!!!"
+		continue 1
+	fi
 		
 	for partition_name in {$partition_list}
 	do	
