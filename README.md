@@ -1,4 +1,4 @@
-一、ReMount.sh
+一、Remount.sh
 
 1. 用途：
 
@@ -6,9 +6,9 @@
 
 2. 用法：
 
-./ReMount.sh
+./Remount.sh
 
-(如果你想双击运行，可以把ReMount.sh重命名为ReMount.command)
+(如果你想双击运行，可以把Remount.sh重命名为Remount.command)
 
 
 二、FlashLoad.sh
