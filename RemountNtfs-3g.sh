@@ -80,9 +80,20 @@ do
 	# Get all describe string of a disk
 	disk_str=$(expr "$disk_list" : '.*\(/dev/'"$disk_name"'.*'"${disk_name}"'s.\).*$')
 
-	
-	# Get all partition of a disk
-	partition_list=$(echo "$disk_str" | grep "Windows_NTFS")
+	# Get all partition of a disk as partition scheme type
+	partition_scheme_type=$(echo "$disk_str" | grep "GUID_partition_scheme")
+
+	# Get all partition of a disk as partition scheme type
+	partition_scheme_type=$(echo "$disk_str" | grep "GUID_partition_scheme")
+
+	if [ "$partition_scheme_type" != "" ]
+	then
+		type_str="Microsoft Basic Data"
+	else
+		type_str="Windows_NTFS"
+	fi
+
+	partition_list=$(echo "$disk_str" | grep "$type_str")
 	
 	if [ "$partition_list" = "" ]
 	then

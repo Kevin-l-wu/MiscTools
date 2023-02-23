@@ -27,8 +27,9 @@ DoRemount(){
 
 	mount_dir_index=$2
 
-	mount_dir=${HOME}/Desktop/Test"$mount_dir_index"
+#	mount_dir=${HOME}/Desktop/Test"$mount_dir_index"
 
+	mount_dir=/Volumes/Test"$mount_dir_index"
 
 	# Unmount device 
 	echo "Checking if mounted"
@@ -36,13 +37,13 @@ DoRemount(){
 
 	if [ "$mounted" = "Yes" ]
 	then
-		sudo umount /dev/${device_name}
+		sudo diskutil unmount /dev/${device_name}
 	fi
 
 	# Create mount dir in desktop
 	if [ ! -e ${mount_dir} ]
 	then
-		mkdir -p "$mount_dir"
+		sudo mkdir -p "$mount_dir"
 		echo "$mount_dir"" has created"
 	else
 		echo "$mount_dir"" exist"
@@ -82,8 +83,17 @@ do
 	disk_str=$(expr "$disk_list" : '.*\(/dev/'"$disk_name"'.*'"${disk_name}"'s.\).*$')
 
 	
-	# Get all partition of a disk
-	partition_list=$(echo "$disk_str" | grep "Windows_NTFS")
+	# Get all partition of a disk as partition scheme type
+	partition_scheme_type=$(echo "$disk_str" | grep "GUID_partition_scheme")
+
+	if [ "$partition_scheme_type" != "" ]
+	then
+		type_str="Microsoft Basic Data"
+	else
+		type_str="Windows_NTFS"
+	fi
+
+	partition_list=$(echo "$disk_str" | grep "$type_str")
 	
 	if [ "$partition_list" = "" ]
 	then
@@ -106,5 +116,7 @@ do
 
 		fi			
 	done
+
+	open /Volumes
 done
 
