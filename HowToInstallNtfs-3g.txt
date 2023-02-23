@@ -1,0 +1,42 @@
+我的硬件：MacBook Pro (Retina, 15-inch, Mid 2015)
+我的系统：MacOS Big Sur 11.6.6
+
+
+
+1.安装macfuse
+
+	1）brew install macfuse
+
+
+2.安装ntfs-3g
+
+	1）brew install --build-from-source ntfs-3g（第一次执行该命令会报错）
+
+	2）brew formula ntfs-3g（找到ntfs-3g.rb文件路径）
+
+	3）vim /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Formula/ntfs-3g.rb（注释掉以下三行）
+	
+		#  on_macos do
+		#    disable! date: "2021-04-08", because: "requires closed-source macFUSE"
+		#  end
+
+	4）brew install --build-from-source ntfs-3g（重新执行该命令）
+
+
+3.前提条件
+
+	1）你的电脑必须安装了xcode（可以在app store 安装或apple 官网下载安装）
+		
+		官网下载地址：https://developer.apple.com/download/more/，搜索Xcode（需要登录apple ID）
+
+	2）安装了command line tools
+
+		终端运行：xcode-select --install
+
+	3）安装了homebrow
+		
+		终端运行：/bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
+		
+		选择1.中科大国内源（安装过程要选择2次）
+		
+		终端运行：source ~/.zprofile
