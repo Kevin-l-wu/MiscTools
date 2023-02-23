@@ -11,7 +11,22 @@
 (如果你想双击运行，可以把Remount.sh重命名为Remount.command)
 
 
-二、FlashLoad.sh
+二、RemountNtfs-3g.sh
+
+1. 用途
+
+同Remount.sh
+
+2. 用法
+
+同Remount.sh
+
+3. 说明：运行该脚本之前，需要安装ntfs-3g模块。
+
+    https://github.com/Kevin-l-wu/MiscTools/blob/main/HowToInstallNtfs-3g.txt
+
+
+三、FlashLoad.sh
 
 1. 用途
 
