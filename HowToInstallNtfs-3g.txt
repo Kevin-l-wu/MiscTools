@@ -63,9 +63,11 @@
 
 		终端运行：source ~/.zprofile
 
-	< 重要提醒 > homebrew4.0会开启API下载，且下载速度极慢，可以通过设置环境变量export HOMEBREW_NO_INSTALL_FROM_API=1来屏蔽API下载
+	< 重要提醒 > homebrew4.0建议关闭自动更新和通过API下载
 
 		终端运行：vim ~/.zprofile
+
+		终端输入：export HOMEBREW_NO_AUTO_UPDATE=true
 
 		终端输入：export HOMEBREW_NO_INSTALL_FROM_API=1
 
