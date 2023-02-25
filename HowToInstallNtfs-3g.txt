@@ -22,6 +22,12 @@
 
 	4）brew install --build-from-source ntfs-3g（重新执行该命令）
 
+	< 重要提醒 > homebrew 最新版本的ntfs-3g formula编译不通过，需要退回之前的版本（2022年10月份之前）
+
+		cd /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/
+
+		git reset --hard 51909c27c566bd0fc74b941d5e31b0ad452093d5
+
 
 3.前提条件
 
@@ -41,6 +47,10 @@
 		
 		终端运行：source ~/.zprofile
 
+	< 重要提醒> homebrew4.0会开启API下载，且下载速度极慢，可以通过设置环境变量export HOMEBREW_NO_INSTALL_FROM_API=1来屏蔽API下载
 
+		vim ~/.zprofile
+
+		export HOMEBREW_NO_INSTALL_FROM_API=1
 
 

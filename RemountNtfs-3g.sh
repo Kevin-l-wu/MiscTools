@@ -1,5 +1,9 @@
 #!/bin/bash
 
+export PATH=$PATH:/usr/local/Cellar/ntfs-3g/2022.5.17/bin/
+export PATH=$PATH:/usr/local/Cellar/ntfs-3g/2022.10.3/bin/
+export PATH=$PATH:/opt/local/bin
+
 # for divided as '\n'
 IFS=$'\n\n'
 
@@ -50,7 +54,7 @@ DoRemount(){
 	# Mounut device
 	echo "remounting..."
 
-	sudo /usr/local/bin/ntfs-3g /dev/${device_name} ${mount_dir} -o local -o allow_other -o auto_xattr -o auto_cache
+	sudo ntfs-3g /dev/${device_name} ${mount_dir} -o local -o allow_other -o auto_xattr -o auto_cache
 
 
 	if [ $? -eq 0 ]
