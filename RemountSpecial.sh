@@ -29,7 +29,7 @@ DoRemount(){
 
 	mount_dir=${HOME}/Desktop/Test"$mount_dir_index"
 
-	special_dir=${mount_dir}/_SPECIAL_DIR
+	special_dir=${mount_dir}/_SP_DIR
 
 	
 	# Unmount device 
