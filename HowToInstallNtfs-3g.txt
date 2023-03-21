@@ -1,15 +1,22 @@
-我的硬件：MacBook Pro (Retina, 15-inch, Mid 2015)
-我的系统：MacOS Big Sur 11.6.6
+硬件：MacBook Pro (Retina, 15-inch, Mid 2015)
+系统：MacOS Big Sur 11.6.6
 
 
 
-1.安装macfuse（FUSE: 用户空间文件系统（Filesystem in Userspace）, ntfs-3g 是基于FUSE 开发的，所以拷贝速度很慢）
+1.安装macfuse（FUSE: 用户空间文件系统（Filesystem in Userspace）, ntfs-3g 是基于FUSE 开发的，需要先安装macfuse）
 
-	1）brew install macfuse
+	1）终端运行：brew install macfuse
 
-	2）或者官网下载安装
+	2）官网下载安装
 
 		https://github.com/osxfuse/osxfuse/releases
+
+	3) 终端运行：sudo port install macfuse
+
+	   终端运行：sudo ln -fsn /opt/local/Library/Filesystems/macfuse.fs /Library/Filesystems/macfuse.fs
+
+		注：port安装需要在系统默认路径建立软连接
+
 
 2.安装ntfs-3g 的方法一
 
@@ -18,6 +25,10 @@
 		https://ports.macports.org/port/ntfs-3g
 
 	2）终端运行：sudo port install ntfs-3g
+
+	   终端运行：sudo ln -fsn /opt/local/Library/Filesystems/macfuse.fs /Library/Filesystems/macfuse.fs
+
+		注：安装ntfs-3g时，port会自动安装macfuse，如果已安装macfuse，则可省略第二条命令
 
 	3）最终的安装路径在：/opt/local/bin
 
@@ -45,15 +56,15 @@
 	5）最终的安装路径：/usr/local/Cellar/ntfs-3g/2022.5.17/bin/
 
 
-4.前提条件
+4.方法二的前提条件
 
-	1）你的电脑必须安装了xcode（可以在app store 安装或apple 官网下载安装）
+	1）你的电脑安装了xcode（可以在app store 安装或apple 官网下载安装，非必须安装）
 
 		官网下载地址：https://developer.apple.com/download/more/，搜索Xcode（需要登录apple ID）
 
 	2）安装了command line tools
 
-		终端运行：xcode-select --install
+		终端运行：xcode-select --install（或gcc -v）
 
 	3）安装了homebrow
 

@@ -1,30 +1,20 @@
 #!/bin/bash
 
-
 IFS=$'\n'
-
-#TestPath="/Volumes/未命名卷宗"
-#TestPath="/Users/kevin/Desktop/Test/Test1"
 
 Count=0
 
-#
+#Delete extend attr Finderinfo
 DelExtAttr() {
 
 	FileList=$(ls $1)
 
-#	echo $FileList
-
 	for file_name in $FileList
 	do
-		#file_name=$(expr "$file" : '^ *\(.*\)')
-
 		if [ -d $1"/"$file_name ] 
 		then
-			#echo $1"/"$file
 			DelExtAttr $1"/"$file_name
 		else
-			#echo "delte addr: "$1"/"$file_name
 			xattr -w com.apple.FinderInfo "00000000000000000010000000000000" $1"/"$file_name
 
 			Count=$((Count+1))
@@ -32,14 +22,7 @@ DelExtAttr() {
 	done
 }
 
-#DelExtAttr $TestPath
-
-
 VolumePath="/Volumes"
-
-#VolumePath="//Users/kevin/Desktop/Test"
-
-
 
 DirList=$(ls $VolumePath)
 
@@ -49,7 +32,6 @@ do
 
 	if [ "${dir_name}" != "" ]
 	then
-		#echo $dir_name
 		DelExtAttr $VolumePath"/"$dir_name
 	fi
 done
