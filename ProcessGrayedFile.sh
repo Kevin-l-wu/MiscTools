@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-IFS=','
+IFS=$'\n'
 
 #TestPath="/Volumes/未命名卷宗"
 #TestPath="/Users/kevin/Desktop/Test/Test1"
@@ -11,13 +11,13 @@ Count=0
 #
 DelExtAttr() {
 
-	FileList=$(ls -m $1)
+	FileList=$(ls $1)
 
 #	echo $FileList
 
-	for file in $FileList
+	for file_name in $FileList
 	do
-		file_name=$(expr "$file" : '^ *\(.*\)')
+		#file_name=$(expr "$file" : '^ *\(.*\)')
 
 		if [ -d $1"/"$file_name ] 
 		then
@@ -41,15 +41,15 @@ VolumePath="/Volumes"
 
 
 
-DirList=$(ls -m $VolumePath)
+DirList=$(ls $VolumePath)
 
 for dir in $DirList
 do
-	dir_name=$(expr "$dir" : '.*\(Test.*\)')
+	dir_name=$(expr "$dir" : '\(Test.*\)')
 
 	if [ "${dir_name}" != "" ]
 	then
-#		echo $dir_name
+		#echo $dir_name
 		DelExtAttr $VolumePath"/"$dir_name
 	fi
 done
