@@ -3,6 +3,7 @@
 export PATH=$PATH:/usr/local/Cellar/ntfs-3g/2022.5.17/bin/
 export PATH=$PATH:/usr/local/Cellar/ntfs-3g/2022.10.3/bin/
 export PATH=$PATH:/opt/local/bin
+export PATH=$PATH:/opt/homebrew/bin
 
 # for divided as '\n'
 IFS=$'\n\n'
