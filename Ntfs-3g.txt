@@ -1,0 +1,148 @@
+一. Mac下最好用的NTFS工具
+	
+	Paragon/ntfs3 + App cleaner and uninstaller
+
+		https://www.paragon-software.com/us/home/ntfs-mac/
+
+		App cleaner and uninstaller免费版下载地址1: https://www.macyy.cn/archives/345（8.0.4版本，支持13系统）
+		
+		App cleaner and uninstaller免费版下载地址2: https://macapp.org.cn/app/app-cleaner-and-uninstaller-pro.html
+
+		App cleaner and uninstaller官网：https://nektony.com/mac-app-cleaner?gclid=EAIaIQobChMI0_uZ3dr0_QIVGxatBh0a7grIEAAYASAAEgKO2vD_BwE
+
+
+二. 几种常见ntfs工具的优点和缺点
+
+	1）基于系统原生ntfs：(12及以下系统)
+
+		通过命令重新挂载：
+
+			diskutil list
+
+			sudo umount /dev/disk2s1（sudo diskutil umount /dev/disk2s1）
+
+			sudo mount -t ntfs -o rw,nobrowse /dev/disk2s1 ~/Desktop/Test1
+
+		Mounty: https://mounty.app/（最新版本用的是ntfs-3g + macfuse）
+
+		Omi NTFS: https://omiapps.com/product/1585757563
+
+		备注1：修复灰化文件
+
+			xattr -l <path_name>
+
+			xattr -d com.apple.FinderInfo <path_name>
+
+			xattr -w com.apple.FinderInfo "00000000000000000010000000000000" <path_name>
+
+		备注2: 13系统该目录/System/Library/Filesystems/下没有ntfs.fs文件，所以不能基于原生ntfs重新挂载
+
+	2）Tuxera/ntfs-3g：（基于macfuse实现）
+
+		https://ntfsformac.tuxera.com/
+
+		备注1:打印磁盘速度命令iostat -d -K 2
+
+	3) Paragon/ntfs3：（已加入Linux内核）
+
+		https://www.paragon-software.com/us/home/ntfs-mac/
+
+	备注： App cleaner and uninstaller
+
+		App cleaner and uninstaller免费版下载地址1: https://www.macyy.cn/archives/345（8.0.4版本，支持13系统）
+		
+		App cleaner and uninstaller免费版下载地址2: https://macapp.org.cn/app/app-cleaner-and-uninstaller-pro.html
+
+		App cleaner and uninstaller官网：https://nektony.com/mac-app-cleaner?gclid=EAIaIQobChMI0_uZ3dr0_QIVGxatBh0a7grIEAAYASAAEgKO2vD_BwE
+
+
+三. NTFS-3G安装方法
+
+前提条件：
+
+	需要安装Xcode和command line tools：
+
+		https://developer.apple.com/download/all/?q=xcode
+
+		xcode-select --install（或gcc -v）
+
+1. NTFS-3G安装方法一
+
+	1）安装macfuse:
+
+		官网: https://osxfuse.github.io/
+
+		Github: https://github.com/macfuse/macfuse/releases
+
+
+	2）安装macports：https://ports.macports.org/port/ntfs-3g
+
+	3）利用macports安装ntfs-3g：
+
+		sudo port install ntfs-3g
+
+		sudo ln -fsn /opt/local/Library/Filesystems/macfuse.fs /Library/Filesystems/macfuse.fs（如果通过第一步手动安装了macfuse，可省略该命令）
+
+	4) 挂载
+		
+		用命挂载：sudo ntfs-3g /dev/disk2s1 /Users/kevin/Desktop/Test -o local -o allow_other -o auto_xattr -o auto_cache 
+
+		用脚本挂载：./RemountNtfs-3g.sh
+		
+		用mounty挂载：sudo ln -fsn /opt/local/bin/ntfs-3g /opt/homebrew/bin/ntfs-3g
+
+		
+2. NTFS-3G安装方法二
+
+	1) 安装macfuse：
+
+		官网：https://osxfuse.github.io/
+
+		Github: https://github.com/macfuse/macfuse/releases
+
+	2）安装homebrew：
+
+		/bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
+
+		vim ~/.zprofile
+
+		export HOMEBREW_NO_AUTO_UPDATE=true
+
+		export HOMEBREW_NO_INSTALL_FROM_API=1
+
+		source ~/.zprofile
+
+		备注：有些软件需要编译安装，可能还需要安装command line tool，可以在终端运gcc -v
+
+	3）安装ntfs-3g：
+
+		brew install ntfs-3g （或者brew install --build-from-source ntfs-3g）
+
+		备注1：最新版本的ntfs-3g是安装不上的，需要退回旧版本的formula
+
+			cd /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/
+
+			git reset --hard 51909c27c566bd0fc74b941d5e31b0ad452093d5
+
+		备注2：然后修改旧版本的formula
+
+			vim /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Formula/ntfs-3g.rb（注释掉以下三行）
+
+			# on_macos do
+			#  disable! date: "2021-04-08", because: "requires closed-source macFUSE"
+			# end
+
+		备注3:  如果想安装ntfs-3g最新版本（2022.10.3）需要修改formula的url 和哈希值
+
+			vim /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Formula/ntfs-3g.rb（替换为下面两行）
+	
+			url "https://tuxera.com/opensource/ntfs-3g_ntfsprogs-2022.10.3.tgz"
+
+  			sha256 "f20e36ee68074b845e3629e6bced4706ad053804cbaf062fbae60738f854170c"
+
+	4) 挂载
+
+		mounty：ln -fsn /opt/local/bin/ntfs-3g /opt/local/bin/ntfs-3g
+
+		./RemountNtfs-3g.sh
+
