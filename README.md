@@ -25,6 +25,7 @@
 
     https://github.com/Kevin-l-wu/MiscTools/blob/main/HowToInstallNtfs-3g.txt
 
+    https://github.com/Kevin-l-wu/MiscTools/blob/main/NtfsToolsCmp.txt
 
 三、FlashLoad.sh
 
